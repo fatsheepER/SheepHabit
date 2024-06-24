@@ -8,108 +8,95 @@
 import SwiftUI
 
 struct HabitLineDotsGraph: View {
-    @State var habit: Habit
-    @State var completionPercentages: [Double] = []
-    @State var isLoading: Bool = true
-    @State var dotCount: Int = 0
-    
-    let dotSize: CGFloat
-    let spacing: CGFloat
+    let percentages: [Double]
+    let accentColor: Color
+    let weekday: Int
     
     var body: some View {
-        GeometryReader { geo in
-            let width = Int(geo.size.width)
-            ZStack {
-//                if isLoading {
-//                    ProgressView()
-//                        .progressViewStyle(CircularProgressViewStyle())
-//                }
-//                else {
-//
-//                }
-                HStack(spacing: self.spacing) {
-                    ForEach(0..<self.dotCount, id:\.self) {columnIndex in
-                        let index = self.dotCount - columnIndex - 1
-                        if let percentage = completionPercentages[safe: index] {
-                            DotView(size: self.dotSize, accentColor: habit.accentColor, percentage: percentage, highlighted: index == 0)
-                                .id("dotIndex\(index)")
-                        }
-                        else {
-                            DotView(size: self.dotSize, accentColor: habit.accentColor, percentage: 0, highlighted: false)
-                                .id("dotIndex\(index)")
-                        }
-                    }
-                }
-            }
-            .onAppear {
-                dotCount = width / Int(dotSize + spacing)
-                fetchData(for: dotCount)
-            }
-            .onChange(of: width) {
-                dotCount = width / Int(dotSize + spacing)
-                fetchData(for: dotCount)
-            }
-            .onChange(of: habit.completions) {
-                fetchData(for: dotCount)
-            }
+        HStack(spacing: 5) {
+            StripeIndicator(
+                accentColor: accentColor,
+                percentage: percentages[safe: 0] ?? 0,
+                isToday: weekday == 1,
+                weekday: "S")
+            
+            StripeIndicator(
+                accentColor: accentColor,
+                percentage: percentages[safe: 1] ?? 0,
+                isToday: weekday == 2,
+                weekday: "M")
+            
+            StripeIndicator(
+                accentColor: accentColor,
+                percentage: percentages[safe: 2] ?? 0,
+                isToday: weekday == 3,
+                weekday: "T")
+            
+            StripeIndicator(
+                accentColor: accentColor,
+                percentage: percentages[safe: 3] ?? 0,
+                isToday: weekday == 4,
+                weekday: "W")
+            
+            StripeIndicator(
+                accentColor: accentColor,
+                percentage: percentages[safe: 4] ?? 0,
+                isToday: weekday == 5,
+                weekday: "T")
+            
+            StripeIndicator(
+                accentColor: accentColor,
+                percentage: percentages[safe: 5] ?? 0,
+                isToday: weekday == 6,
+                weekday: "F")
+            
+            StripeIndicator(
+                accentColor: accentColor,
+                percentage: percentages[safe: 6] ?? 0,
+                isToday: weekday == 7,
+                weekday: "S")
         }
-        .frame(height: 25)
     }
 }
 
 // MARK: - Functions and components
 extension HabitLineDotsGraph {
     
-    func fetchData(for count: Int) {
-        isLoading = true
-        DispatchQueue.global().async {
-            // 需要的完成数量
-            let required: Double = Double(habit.requiredCompletion)
-            // 日历
-            let calendar = Calendar.current
-            // 获取今天的日期
-            let todayDate = calendar.startOfDay(for: Date())
-            // 数据清零
-            completionPercentages = []
-            
-            // 位移查值
-            for dayOffset in 0..<count {
-                let date = calendar.date(byAdding: .day, value: -dayOffset, to: todayDate)
-                let value = Double(habit.completions[date!] ?? 0)
-                completionPercentages.append(value / required)
-            }
-            
-            isLoading = false
-        }
-    }
-    
-    func updateToday() {
-        let newPercentage = habit.todayCompletionPercentage
-        completionPercentages[0] = newPercentage
-    }
-    
-    struct DotView: View {
-        let size: CGFloat
+    struct StripeIndicator: View {
         let accentColor: Color
         let percentage: Double
-        let highlighted: Bool
+        let isToday: Bool
+        let weekday: String
         
         var body: some View {
-            ZStack {
-                // 基础色
-                RoundedRectangle(cornerRadius: size / 5)
-                    .foregroundStyle(.white.opacity(0.1))
+            VStack {
                 
-                // 完成度着色
-                RoundedRectangle(cornerRadius: size / 5)
-                    .foregroundStyle(self.accentColor.opacity(percentage))
+                Text(weekday)
+                    .font(.system(size: 9, weight: .bold, design: .rounded))
+                    .foregroundStyle(.white)
+                    .opacity(isToday ? 1 : 0.5)
                 
-                // 今日描边
-                RoundedRectangle(cornerRadius: size / 5)
-                    .strokeBorder(.white.opacity(0.5), lineWidth: 2)
-                    .opacity(highlighted ? 1 : 0)
+                Spacer()
+                
+                ZStack {
+                    
+                    // 底部基础色层
+                    RoundedRectangle(cornerRadius: 3)
+                        .foregroundStyle(.white.opacity(0.2))
+                    
+                    // 发光色层
+                    RoundedRectangle(cornerRadius: 3)
+                        .foregroundStyle(accentColor)
+                        .blur(radius: 5)
+                        .opacity(percentage >= 1 ? 1 : 0)
+                    
+                    // 完成度色层
+                    RoundedRectangle(cornerRadius: 3)
+                        .foregroundStyle(accentColor.opacity(percentage))
+                }
+                .frame(height: 6)
             }
-            .frame(width: size, height: size)
+            .frame(height: 20)
         }
     }
 }

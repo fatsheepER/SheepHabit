@@ -26,7 +26,6 @@ struct HabitDetailView: View {
                 // 标题与描述
                 TitleInformationSection
                     .frame(height: 65)
-                    .padding(.bottom, 10)
                 
                 VStack(spacing: 15) {
                    

@@ -42,10 +42,14 @@ struct ContentView: View {
     // add new habit
     @State var isPresentingAddNewHabit = false
     
+    // today
+    @State var presentedHabit: Habit?
+    @State var contextMenuDeletedHabit: Habit?
+    @State var showContextMenuDeleteAlarm = false
+    @State var showToolbarDeleteAlarm = false
+    
     // habit detail
     @State var isPresentingDetailView = false
-    @State var presentedHabit: Habit?
-    @State var isPresentingDeleteAlert = false
     let hideDetailViewButtonTip = HideDetailViewButton()
     
     // Review
@@ -164,6 +168,7 @@ extension ContentView {
                         
                         ForEach(habits) { habit in
                             
+                            // Habit View
                             Button {
                                 withAnimation {
                                     presentedHabit = habit
@@ -179,10 +184,27 @@ extension ContentView {
                                         }
                                         
                                         Button(role: .destructive) {
-                                            modelContext.delete(habit)
+                                            contextMenuDeletedHabit = habit
+                                            showContextMenuDeleteAlarm = true
                                         } label: {
                                             Label("删除", systemImage: "trash")
                                         }
+                                    }
+                                    .alert(isPresented: $showContextMenuDeleteAlarm) {
+                                        Alert(
+                                            title: Text("确定删除这个习惯吗？"),
+                                            message: Text("此操作无法撤销。"),
+                                            primaryButton: .destructive(Text("删除")) {
+                                                isPresentingDetailView = false
+                                                
+                                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                                                    if let _habit = contextMenuDeletedHabit {
+                                                        modelContext.delete(_habit)
+                                                    }
+                                                }
+                                            },
+                                            secondaryButton: .cancel()
+                                        )
                                     }
                             }
                             .padding(.bottom, 20)
@@ -207,13 +229,18 @@ extension ContentView {
                                         
                                         detailTabBar
                                             .padding(.bottom, 20)
-                                            .alert(isPresented: $isPresentingDeleteAlert) {
+                                            .alert(isPresented: $showToolbarDeleteAlarm) {
                                                 Alert(
                                                     title: Text("确定删除这个习惯吗？"),
                                                     message: Text("此操作无法撤销。"),
                                                     primaryButton: .destructive(Text("删除")) {
                                                         isPresentingDetailView = false
-                                                        modelContext.delete(presentedHabit!)
+                                                        
+                                                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                                                            if let deletedHabit = presentedHabit {
+                                                                modelContext.delete(deletedHabit)
+                                                            }
+                                                        }
                                                     },
                                                     secondaryButton: .cancel()
                                                 )
@@ -222,6 +249,7 @@ extension ContentView {
                                     .ignoresSafeArea()
                                 }
                             }
+                            .transition(.move(edge: .trailing))
                         }
                         
                         Rectangle()
@@ -535,7 +563,7 @@ extension ContentView {
                     .padding(.horizontal)
                     
                     Rectangle()
-                        .frame(height: 180)
+                        .frame(height: 130)
                         .opacity(0)
                 }
             }

@@ -13,6 +13,7 @@ struct HabitView: View {
     @Bindable var habit: Habit
     @State var today: Int = 0
     @State var required: Int = 0
+    @State var percentages: [Double] = []
     
     var body: some View {
         ZStack {
@@ -53,12 +54,23 @@ struct HabitView: View {
                         Spacer()
                     }
                     
-                    HabitLineDotsGraph(habit: habit, dotSize: 25, spacing: 6)
+                    let currentWeekday = Calendar.current.dateComponents([.weekday], from: .now).weekday
+                    
+                    HabitLineDotsGraph(
+                        percentages: self.percentages,
+                        accentColor: habit.accentColor,
+                        weekday: currentWeekday ?? 1)
+                    .onAppear {
+                        fetchWeeklyData()
+                    }
+                    .onChange(of: habit.completions) {
+                        fetchWeeklyData()
+                    }
                 }
             }
             .padding(13 )
         }
-        .frame(height: 140)
+        .frame(height: 120)
     }
 }
 
@@ -98,6 +110,27 @@ extension HabitView {
 
 //MARK: - Functions
 extension HabitView {
+    
+    // 获取 LineDotsGraph 的数据
+    func fetchWeeklyData() {
+        let calendar = Calendar.current
+        let today = calendar.startOfDay(for: .now)
+        let weekComponents = calendar.dateComponents([.yearForWeekOfYear, .weekOfYear], from: .now)
+        let startOfWeek = calendar.date(from: weekComponents)!
+        
+        percentages = []
+        for dayOffset in 0..<7 {
+            let date = calendar.date(byAdding: .day, value: dayOffset, to: startOfWeek)!
+            
+            if date < habit.startDate || date > today {
+                percentages.append(0.0)
+            }
+            else {
+                let value = habit.completions[date] ?? 0
+                percentages.append(Double(value) / Double(habit.requiredCompletion))
+            }
+        }
+    }
     
     // 完成一次
     func completeOnce() {

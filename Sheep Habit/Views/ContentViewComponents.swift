@@ -51,22 +51,24 @@ extension ContentView {
         ZStack {
             
             // Background
-            RoundedRectangle(cornerRadius: 40)
-                .foregroundStyle(colorManager.selectedTheme.secondary)
-                .overlay {
-                    RoundedRectangle(cornerRadius: 40)
-                        .strokeBorder(.white.opacity(0.15), lineWidth: 1)
-                }
+            RoundedRectangle(cornerRadius: 30)
+                .fill(.ultraThinMaterial)
+            
+            RoundedRectangle(cornerRadius: 30)
+                .foregroundStyle(.black.opacity(0.15))
+            
+            RoundedRectangle(cornerRadius: 30)
+                .strokeBorder(.white.opacity(0.15), lineWidth: 1)
             
             HStack {
                 
                 // Delete
                 Button {
-                    isPresentingDeleteAlert = true
+                    showToolbarDeleteAlarm = true
                 } label: {
                     ZStack {
-                        Circle()
-                            .foregroundStyle(.white.opacity(0.001))
+                        Rectangle()
+                            .foregroundColor(.white.opacity(0.001))
                         Image(systemName: "trash")
                             .foregroundStyle(.white)
                             .font(.system(size: 16, weight: .bold))
@@ -78,8 +80,8 @@ extension ContentView {
                     
                 } label: {
                     ZStack {
-                        Circle()
-                            .foregroundStyle(.white.opacity(0.001))
+                        Rectangle()
+                            .foregroundColor(.white.opacity(0.001))
                         Image(systemName: "tray")
                             .foregroundStyle(.white)
                             .font(.system(size: 16, weight: .bold))
@@ -91,8 +93,8 @@ extension ContentView {
                     
                 } label: {
                     ZStack {
-                        Circle()
-                            .foregroundStyle(.white.opacity(0.001))
+                        Rectangle()
+                            .foregroundColor(.white.opacity(0.001))
                         Image(systemName: "pencil")
                             .foregroundStyle(.white)
                             .font(.system(size: 16, weight: .bold))
@@ -106,16 +108,17 @@ extension ContentView {
                     }
                 } label: {
                     ZStack {
-                        Circle()
-                            .foregroundStyle(.white.opacity(0.001))
+                        Rectangle()
+                            .foregroundColor(.white.opacity(0.001))
                         Image(systemName: "chevron.down")
                             .foregroundStyle(.white)
                             .font(.system(size: 16, weight: .bold))
                     }
                 }
             }
+            .padding(.horizontal, 0)
         }
-        .frame(height: 80)
+        .frame(height: 60)
         .frame(maxWidth: 320)
     }
     
