@@ -1,0 +1,15 @@
+{
+  "images" : [
+    {
+      "filename" : "Selling England By the Pound.png",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  },
+  "properties" : {
+    "localizable" : true
+  }
+}
