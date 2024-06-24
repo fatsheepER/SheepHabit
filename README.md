@@ -1,2 +1,3 @@
-# SheepHabit
-Another iOS habit-tracking app.
+# Sheep Habit
+
+Another iOS habit-tracking app, with SwiftUI.

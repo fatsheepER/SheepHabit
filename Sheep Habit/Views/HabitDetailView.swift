@@ -141,68 +141,6 @@ extension HabitDetailView {
         }
     }
     
-    // 最近记录信息区
-    private var recentSection: some View {
-        ZStack {
-            sectionBackground
-            
-            VStack {
-                
-                // 标题
-                HStack {
-                    SectionTitleView(accentColor: habit.accentColor, iconSystemName: "arrowshape.turn.up.backward.circle", title: "修改", detail: "最近七天")
-                    Spacer()
-                }
-                
-                Spacer()
-                
-                // 最近七天的记录
-                if !isPresentingLogView {
-                    VStack() {
-                        
-                        let requirement = habit.requiredCompletion
-                        let startDate = habit.startDate
-                        let accentColor = habit.accentColor
-                        ForEach(0..<7, id: \.self) { index in
-                            let date = Calendar.current.date(byAdding: .day, value: -index, to: .now)!
-                            
-                            if date >= startDate {
-                                Button {
-                                    completeOnce(for: index)
-                                    fetchData()
-                                } label: {
-                                    HabitLogRecord(date: date, completion: self.recentData[safe: index] ?? 0, requirement: requirement, accentColor: accentColor)
-                                }
-                                .frame(height: 50)
-                            }
-                            
-                        }
-                        
-                        // 查看日志
-                        Button {
-                            withAnimation {
-                                self.isPresentingLogView = true
-                            }
-                        } label: {
-                            NavigationButton(title: "查看日志", iconSystemName: "tray.full", height: 45, cornerRadius: 6, fontSize: 15)
-                        }
-                        .padding(.top)
-                    }
-                    .onAppear {
-                        fetchData()
-                    }
-                }
-                else {
-                    HabitLog(habit: self.habit, isPresenting: $isPresentingLogView)
-                        .frame(maxWidth: .infinity)
-                }
-
-                
-            }
-            .padding()
-        }
-    }
-    
     // 坚持信息区
     private var streakSection: some View {
         ZStack {
@@ -229,6 +167,33 @@ extension HabitDetailView {
             .padding(.horizontal)
         }
     }
+    
+    // 最近记录信息区
+    private var recentSection: some View {
+        ZStack {
+            sectionBackground
+            
+            VStack {
+                
+                // 标题
+                HStack {
+                    SectionTitleView(accentColor: habit.accentColor, iconSystemName: "arrowshape.turn.up.backward.circle", title: "修改", detail: "最近七天")
+                    Spacer()
+                }
+                
+                Spacer()
+                
+                // 最近七天的记录
+                HabitLog(habit: self.habit)
+                    .frame(maxWidth: .infinity)
+
+                
+            }
+            .padding()
+        }
+    }
+    
+   
     
     func fetchData() {
         isLoadingRecent = true
@@ -310,10 +275,6 @@ struct NavigationButton: View {
             }
             .foregroundStyle(.white)
             .padding(.horizontal)
-            
-            // 边框
-            RoundedRectangle(cornerRadius: self.cornerRadius)
-                .strokeBorder(.white.opacity(0.2), lineWidth: 1)
         }
         .frame(height: self.height)
     }

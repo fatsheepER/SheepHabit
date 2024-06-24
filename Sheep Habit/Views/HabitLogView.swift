@@ -24,7 +24,6 @@ struct DayOption: Identifiable {
 struct HabitLog: View {
     @Environment(\.modelContext) private var modelContext
     @Bindable var habit: Habit
-    @Binding var isPresenting: Bool
     @State var selectedTag: Int = 0
     @State var validMonths: [MonthOption] = []
     @State var recordsOfMonth: [DayOption] = []
@@ -36,15 +35,73 @@ struct HabitLog: View {
             let selectedMonth = calendar.date(byAdding: .month, value: -selectedTag, to: currentMonth)!
             let requirement = habit.requiredCompletion
             
-            ScrollView(.vertical, showsIndicators: false) {
+            let columns = Array(repeating: GridItem(), count: 7)
+            
+            LazyVGrid(columns: columns, spacing: 4) {
+                let dateOfFirstRecord = recordsOfMonth.first?.startOfDay
+                let emptyDaysAhead = dateOfFirstRecord != nil ? calendar.component(.day, from: dateOfFirstRecord!) - 1 : 0
+                let emptyDaysLastMonth = calendar.component(.weekday, from: selectedMonth) - 1
+                let emptySpaces = (emptyDaysAhead + emptyDaysLastMonth) % 7
+                
+                Group {
+                    Text("S")
+                        .font(.system(size: 12, weight: .bold, design: .rounded))
+                    
+                    Text("M")
+                        .font(.system(size: 12, weight: .bold, design: .rounded))
+                    
+                    Text("T")
+                        .font(.system(size: 12, weight: .bold, design: .rounded))
+                    
+                    Text("W")
+                        .font(.system(size: 12, weight: .bold, design: .rounded))
+                    
+                    Text("T")
+                        .font(.system(size: 12, weight: .bold, design: .rounded))
+                    
+                    Text("F")
+                        .font(.system(size: 12, weight: .bold, design: .rounded))
+                    
+                    Text("S")
+                        .font(.system(size: 12, weight: .bold, design: .rounded))
+                }
+                
+                ForEach(0..<emptySpaces, id: \.self) { index in
+                    VStack {
+                        RoundedRectangle(cornerRadius: 5)
+                            .foregroundStyle(.white.opacity(0.05))
+                            .frame(width: 30, height: 30)
+                        
+                        Text(String(0))
+                            .foregroundStyle(.white)
+                            .font(.system(size: 9, weight: .bold, design: .rounded))
+                    }
+                    .opacity(0)
+                }
+                
                 ForEach(recordsOfMonth) { record in
+                    
                     Button {
                         completeOnceFor(monthIndex: selectedTag, dayIndex: record.index)
                         fetchRecordOfMonth()
                     } label: {
-                        HabitLogRecord(date: record.startOfDay, completion: record.value, requirement: requirement, accentColor: habit.accentColor)
+                        VStack {
+                            ZStack {
+                                RoundedRectangle(cornerRadius: 5)
+                                    .foregroundStyle(.white.opacity(0.05))
+                                
+                                RoundedRectangle(cornerRadius: 5)
+                                    .foregroundStyle(habit.accentColor)
+                                    .opacity(Double(record.value) / Double(requirement))
+                            }
+                            .frame(width: 30, height: 30)
+                            
+                            let dayComponent = calendar.component(.day, from: record.startOfDay)
+                            Text(String(dayComponent))
+                                .foregroundStyle(.white)
+                                .font(.system(size: 9, weight: .bold, design: .rounded))
+                        }
                     }
-                    .frame(height: 50)
                 }
             }
             
@@ -75,7 +132,9 @@ struct HabitLog: View {
                     // Next and previous button
                     HStack {
                         Button {
-                            toLastMonth()
+                            withAnimation {
+                                toLastMonth()
+                            }
                         } label: {
                             Image(systemName: "minus")
                         }
@@ -83,7 +142,9 @@ struct HabitLog: View {
                         Spacer()
                         
                         Button {
-                            toNextMonth()
+                            withAnimation {
+                                toNextMonth()
+                            }
                         } label: {
                             Image(systemName: "plus")
                         }
@@ -91,26 +152,6 @@ struct HabitLog: View {
                     .font(.system(size: 15, weight: .bold))
                     .foregroundStyle(.white)
                     .padding(.horizontal)
-                }
-                .frame(height: 40)
-                
-                // Done Button
-                Button {
-                    withAnimation {
-                        self.isPresenting = false
-                    }
-                } label: {
-                    ZStack {
-                        RoundedRectangle(cornerRadius: 8)
-                            .foregroundStyle(habit.accentColor.opacity(0.2))
-                        
-                        Text("完成")
-                            .font(.system(size: 15, weight: .medium))
-                            .foregroundStyle(.white)
-                        
-                        RoundedRectangle(cornerRadius: 8)
-                            .strokeBorder(LinearBorderGradient, lineWidth: 1)
-                    }
                 }
                 .frame(height: 40)
             }
@@ -225,9 +266,6 @@ extension HabitLog {
         ZStack {
             RoundedRectangle(cornerRadius: 8)
                 .foregroundStyle(.white.opacity(0.1))
-            
-            RoundedRectangle(cornerRadius: 8)
-                .strokeBorder(LinearBorderGradient, lineWidth: 1)
         }
     }
 }
