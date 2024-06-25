@@ -11,8 +11,6 @@ import ContributionChart
 struct HabitView: View {
     @Environment(\.modelContext) private var modelContext
     @Bindable var habit: Habit
-    @State var today: Int = 0
-    @State var required: Int = 0
     @State var percentages: [Double] = []
     
     var body: some View {

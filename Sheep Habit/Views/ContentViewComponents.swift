@@ -105,6 +105,7 @@ extension ContentView {
                 Button {
                     withAnimation {
                         self.isPresentingDetailView = false
+                        presentedHabit = nil
                     }
                 } label: {
                     ZStack {

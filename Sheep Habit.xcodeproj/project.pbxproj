@@ -219,8 +219,8 @@
 				67A343FA2C22D190006D46E9 /* ColorManager.swift */,
 				678A40002BFB42CE00EC1318 /* Sheep_HabitApp.swift */,
 				678A40062BFB42CF00EC1318 /* Assets.xcassets */,
-				678A40332BFB95B700EC1318 /* Views */,
 				678A40322BFB95A600EC1318 /* Models */,
+				678A40332BFB95B700EC1318 /* Views */,
 				678A40082BFB42CF00EC1318 /* Preview Content */,
 			);
 			path = "Sheep Habit";

@@ -31,6 +31,43 @@ extension ContentView {
         self.lineChartData = newData
     }
     
+    // - 更新排序信息
+    func updateHabitOrder() {
+        let _habits = habits
+        for index in _habits.indices {
+            _habits[index].order = index
+        }
+        try? modelContext.save()
+    }
+    
+    // - 排序上移
+    func moveHabitUp(for index: Int) {
+        if index <= 0 {
+            return
+        }
+        
+        let target = habits[index]
+        let switched = habits[index - 1]
+        target.order -= 1
+        switched.order += 1
+        
+        try? modelContext.save()
+    }
+    
+    // - 排序下移
+    func moveHabitDown(for index: Int) {
+        if index >= habits.count - 1 {
+            return
+        }
+        
+        let target = habits[index]
+        let switched = habits[index + 1]
+        target.order += 1
+        switched.order -= 1
+        
+        try? modelContext.save()
+    }
+    
     // Review
     // - 获取所有有记录的年份 同时计算总使用天数
     func fetchAllRecordedYears() {

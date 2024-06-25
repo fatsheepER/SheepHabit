@@ -11,9 +11,8 @@ struct HabitDetailView: View {
     @Bindable var habit: Habit
     @State private var recentData: [Int] = []
     @State private var isLoadingRecent: Bool = true
-    @State private var isPresentingLogView: Bool = false
     @Environment(\.modelContext) private var modelContext
-    @Environment(\.dismiss) private var dismiss
+//    @Environment(\.dismiss) private var dismiss
     
     var body: some View {
         ZStack {

@@ -15,6 +15,7 @@ final class Habit: Identifiable {
     
     // 基础信息
     var id = UUID()
+    var order: Int = 0
     var name: String = "新的习惯"
     var detail: String = "描述信息"
     var iconSystemName: String = "curlybraces"
@@ -200,6 +201,7 @@ extension Habit: Hashable {
 
     func hash(into hasher: inout Hasher) {
         hasher.combine(name)
+        hasher.combine(order)
         hasher.combine(detail)
         hasher.combine(startDate)
         hasher.combine(completions)

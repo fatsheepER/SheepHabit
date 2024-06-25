@@ -25,11 +25,11 @@ extension Habit {
 struct ContentView: View {
     
     // data
-    @Environment(\.modelContext) private var modelContext
+    @Environment(\.modelContext) var modelContext
     @EnvironmentObject var colorManager: ColorManager
     
     @Query(filter: Habit.notArchivedPredicate(),
-           sort: \Habit.startDate,
+           sort: \Habit.order,
            animation: .smooth) var habits: [Habit]
     @Query(filter: Habit.archivedPredicate(),
            sort: \Habit.startDate,
@@ -43,8 +43,11 @@ struct ContentView: View {
     @State var isPresentingAddNewHabit = false
     
     // today
+    @State var isSettingOrder: Bool = false
     @State var presentedHabit: Habit?
     @State var contextMenuDeletedHabit: Habit?
+    @State var contextMenuArchivedHabit: Habit?
+    @State var movedHabit: Habit?
     @State var showContextMenuDeleteAlarm = false
     @State var showContextMenuArchiveAlarm = false
     @State var showToolbarDeleteAlarm = false
@@ -170,61 +173,114 @@ extension ContentView {
                         
                         ForEach(habits) { habit in
                             
-                            // Habit View
-                            Button {
+                            // Habit view and order stepper
+                            ZStack {
+                                if isSettingOrder {
+                                    HStack {
+                                        ZStack {
+                                            RoundedRectangle(cornerRadius: 15, style: .continuous)
+                                                .foregroundStyle(.white.opacity(0.08))
+                                            VStack {
+                                                
+                                                // 上移
+                                                Button {
+                                                    withAnimation {
+                                                        movedHabit = habit
+                                                        moveHabitUp(for: movedHabit!.order)
+                                                    }
+                                                } label: {
+                                                    ZStack {
+                                                        Rectangle()
+                                                            .foregroundStyle(.white.opacity(0.001))
+                                                        Image(systemName: "chevron.up")
+                                                            .font(.system(size: 9, weight: .bold))
+                                                            .foregroundStyle(.white)
+                                                    }
+                                                }
+                                                .frame(width: 30, height: 30)
+                                                
+                                                Button {
+                                                    withAnimation {
+                                                        movedHabit = habit
+                                                        moveHabitDown(for: movedHabit!.order)
+                                                    }
+                                                } label: {
+                                                    ZStack {
+                                                        Rectangle()
+                                                            .foregroundStyle(.white.opacity(0.001))
+                                                        Image(systemName: "chevron.down")
+                                                            .font(.system(size: 9, weight: .bold))
+                                                            .foregroundStyle(.white)
+                                                    }
+                                                }
+                                                .frame(width: 30, height: 30)
+                                            }
+//                                            Text("\(habit.order)")
+                                        }
+                                        .frame(width: 30, height: 60)
+                                        Spacer()
+                                    }
+                                    .transition(.move(edge: .leading))
+                                }
+                                
+                                HabitView(habit: habit)
+                                    .offset(x: isSettingOrder ? 42 : 0, y: 0)
+                            }
+                            .contextMenu {
+                                Button("归档", systemImage: "archivebox") {
+                                    contextMenuArchivedHabit = habit
+                                    self.showContextMenuArchiveAlarm = true
+                                }
+                                
+                                Button(role: .destructive) {
+                                    contextMenuDeletedHabit = habit
+                                    self.showContextMenuDeleteAlarm = true
+                                } label: {
+                                    Label("删除", systemImage: "trash")
+                                }
+                            }
+                            .onTapGesture {
                                 withAnimation {
                                     presentedHabit = habit
                                     isPresentingDetailView = true
                                 }
-                            } label: {
-                                HabitView(habit: habit)
-                                    .frame(width: UIScreen.main.bounds.width - 24)
-                                    .padding(.horizontal, 12)
-                                    .contextMenu {
-                                        Button("归档", systemImage: "archivebox") {
-                                            self.showContextMenuArchiveAlarm = true
-                                        }
-                                        
-                                        Button(role: .destructive) {
-                                            contextMenuDeletedHabit = habit
-                                            showContextMenuDeleteAlarm = true
-                                        } label: {
-                                            Label("删除", systemImage: "trash")
-                                        }
-                                    }
-                                    .alert(isPresented: $showContextMenuDeleteAlarm) {
-                                        Alert(
-                                            title: Text("确定删除这个习惯吗？"),
-                                            message: Text("此操作无法撤销。"),
-                                            primaryButton: .destructive(Text("删除")) {
-                                                isPresentingDetailView = false
-                                                
-                                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                                                    if let _habit = contextMenuDeletedHabit {
-                                                        modelContext.delete(_habit)
-                                                    }
-                                                }
-                                            },
-                                            secondaryButton: .cancel()
-                                        )
-                                    }
-                                    .alert(isPresented: $showContextMenuArchiveAlarm) {
-                                        Alert(
-                                            title: Text("确定归档这个习惯吗？"),
-                                            message: Text("你可以在回顾页找到已归档的习惯。"),
-                                            primaryButton: .default(Text("归档")) {
-                                                isPresentingDetailView = false
-                                                
-                                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                                                    if let _habit = contextMenuDeletedHabit {
-                                                        _habit.isArchieved = true
-                                                    }
-                                                }
-                                            },
-                                            secondaryButton: .cancel()
-                                        )
-                                    }
                             }
+                            .alert(
+                                "确定删除这个习惯吗？",
+                                isPresented: $showContextMenuDeleteAlarm,
+                                actions: {
+                                    Button("删除", role: .destructive) {
+                                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                                            if let _habit = contextMenuDeletedHabit {
+                                                modelContext.delete(_habit)
+                                            }
+                                            contextMenuDeletedHabit = nil
+                                        }
+                                    }
+                                    Button("取消", role: .cancel) {}
+                                },
+                                message: {
+                                    Text("这个操作将无法撤回。")
+                                }
+                            )
+                            .alert(
+                                "确定归档这个习惯吗？",
+                                isPresented: $showContextMenuArchiveAlarm,
+                                actions: {
+                                    Button("归档") {
+                                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                                            if let _habit = contextMenuArchivedHabit {
+                                                _habit.isArchieved = true
+                                            }
+                                            contextMenuArchivedHabit = nil
+                                        }
+                                    }
+                                    Button("取消", role: .cancel) {}
+                                },
+                                message: {
+                                    Text("你可以在回顾页找到已归档的习惯。")
+                                }
+                            )
                             .padding(.bottom, 20)
                             .fullScreenCover(isPresented: $isPresentingDetailView) {
                                 ZStack {
@@ -258,6 +314,7 @@ extension ContentView {
                                                             if let deletedHabit = presentedHabit {
                                                                 modelContext.delete(deletedHabit)
                                                             }
+                                                            presentedHabit = nil
                                                         }
                                                     },
                                                     secondaryButton: .cancel()
@@ -274,6 +331,7 @@ extension ContentView {
                                                             if let deletedHabit = presentedHabit {
                                                                 deletedHabit.isArchieved = true
                                                             }
+                                                            presentedHabit = nil
                                                         }
                                                     },
                                                     secondaryButton: .cancel()
@@ -284,19 +342,29 @@ extension ContentView {
                                 }
                             }
                             .transition(.move(edge: .trailing))
+                            .padding(.horizontal, 12)
                         }
-                        
-                        Rectangle()
-                            .frame(height: 160)
-                            .opacity(0)
                     }
+                    .padding(.bottom, 100)
                 }
+//                .onChange(of: habits.hashValue) {
+//                    updateHabitOrder()
+//                }
                 .navigationTitle("Sheep Habit")
                 .toolbar {
                     ToolbarItem(placement: .topBarTrailing) {
                         HStack {
                             Button {
+                                withAnimation {
+                                    self.isSettingOrder.toggle()
+                                }
+                            } label: {
+                                Image(systemName: "pencil")
+                            }
+                            
+                            Button {
                                 let testHabit = Habit(testDate: Date(), from: 400, color: colorManager.selectedTheme.primary)
+                                testHabit.order = habits.count
                                 modelContext.insert(testHabit)
                             } label: {
                                 Image(systemName: "hammer.fill")
@@ -450,30 +518,32 @@ extension ContentView {
                     }
                     .padding(.horizontal, 30)
                     
-                    ForEach(archived) { habit in
-                        
-                        Button {
-                            withAnimation {
-                                presentedHabit = habit
-                            }
-                        } label: {
-                            HabitView(habit: habit)
-                                .frame(width: UIScreen.main.bounds.width - 24)
-                                .padding(.horizontal, 12)
-                        }
-                        .padding(.bottom, 20)
-                        .contextMenu {
-                            Button("取消归档", systemImage: "archivebox") {
-                                habit.isArchieved = false
-                            }
+                    VStack(spacing: 20) {
+                        ForEach(archived) { habit in
                             
-                            Button(role: .destructive) {
-                                modelContext.delete(habit)
+                            Button {
+                                withAnimation {
+                                    presentedHabit = habit
+                                }
                             } label: {
-                                Label("删除", systemImage: "trash")
+                                HabitView(habit: habit)
+                                    .frame(width: UIScreen.main.bounds.width - 24)
+                                    .padding(.horizontal, 12)
+                            }
+                            .contextMenu {
+                                Button("取消归档", systemImage: "archivebox") {
+                                    habit.isArchieved = false
+                                }
+                                
+                                Button(role: .destructive) {
+                                    modelContext.delete(habit)
+                                } label: {
+                                    Label("删除", systemImage: "trash")
+                                }
                             }
                         }
                     }
+                    .padding(.bottom, 100)
                 }
                 .onAppear() {
                     fetchAllRecordedYears()
