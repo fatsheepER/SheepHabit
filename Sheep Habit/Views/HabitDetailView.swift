@@ -40,7 +40,6 @@ struct HabitDetailView: View {
                     // 日志区
                     recentSection
                 }
-                .padding(.bottom, 5)
                
            }
            .padding()
@@ -181,13 +180,11 @@ extension HabitDetailView {
                     Spacer()
                 }
                 
-                Spacer()
-                
                 // 最近七天的记录
                 HabitLog(habit: self.habit)
                     .frame(maxWidth: .infinity)
+                    .padding(.top, 15)
 
-                
             }
             .padding()
         }

@@ -12,6 +12,7 @@
 		673CDFF32C21CFEA009C8317 /* HabitCompletionCaption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 673CDFF22C21CFE3009C8317 /* HabitCompletionCaption.swift */; };
 		67519C6A2C22974A00AA01E9 /* ContentViewFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67519C692C22973A00AA01E9 /* ContentViewFunctions.swift */; };
 		67519C6C2C22ADE800AA01E9 /* HideDetailViewButtonTip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67519C6B2C22ADDD00AA01E9 /* HideDetailViewButtonTip.swift */; };
+		675BD99F2C2A4F9F00F4AD18 /* HabitLogButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 675BD99E2C2A4F9C00F4AD18 /* HabitLogButton.swift */; };
 		6766816E2C2136B2009BEF43 /* YearBlockChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6766816D2C2136AC009BEF43 /* YearBlockChartView.swift */; };
 		676A86532C083999005D742B /* HabitCalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 676A86522C083999005D742B /* HabitCalendarView.swift */; };
 		676A86552C083AE8005D742B /* DotView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 676A86542C083AE8005D742B /* DotView.swift */; };
@@ -45,9 +46,7 @@
 		67D135BE2BFF281900A82DAD /* CustomedPickerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67D135BD2BFF281900A82DAD /* CustomedPickerModel.swift */; };
 		67D1AE112C0B52C700DA59AE /* ContributionChart in Frameworks */ = {isa = PBXBuildFile; productRef = 67D1AE102C0B52C700DA59AE /* ContributionChart */; settings = {ATTRIBUTES = (Required, ); }; };
 		67D1AE132C0E03C900DA59AE /* HabitLineDotsGraph.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67D1AE122C0E03C900DA59AE /* HabitLineDotsGraph.swift */; };
-		67D886262C1FC8D700667A55 /* HabitLogRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67D886252C1FC8D200667A55 /* HabitLogRecord.swift */; };
 		67D886282C1FF6DA00667A55 /* HabitLogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67D886272C1FF6CD00667A55 /* HabitLogView.swift */; };
-		67D8862A2C21108300667A55 /* ClockView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67D886292C21107C00667A55 /* ClockView.swift */; };
 		67D8862C2C21285700667A55 /* ReviewBlockView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67D8862B2C21285000667A55 /* ReviewBlockView.swift */; };
 		67E74BC12C06F821003D1C37 /* HabitCompleteButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67E74BC02C06F821003D1C37 /* HabitCompleteButtonView.swift */; };
 /* End PBXBuildFile section */
@@ -75,6 +74,7 @@
 		673CDFF22C21CFE3009C8317 /* HabitCompletionCaption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitCompletionCaption.swift; sourceTree = "<group>"; };
 		67519C692C22973A00AA01E9 /* ContentViewFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentViewFunctions.swift; sourceTree = "<group>"; };
 		67519C6B2C22ADDD00AA01E9 /* HideDetailViewButtonTip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HideDetailViewButtonTip.swift; sourceTree = "<group>"; };
+		675BD99E2C2A4F9C00F4AD18 /* HabitLogButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitLogButton.swift; sourceTree = "<group>"; };
 		6766816D2C2136AC009BEF43 /* YearBlockChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YearBlockChartView.swift; sourceTree = "<group>"; };
 		676A86522C083999005D742B /* HabitCalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitCalendarView.swift; sourceTree = "<group>"; };
 		676A86542C083AE8005D742B /* DotView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DotView.swift; sourceTree = "<group>"; };
@@ -110,9 +110,7 @@
 		67D135BB2BFF27D900A82DAD /* CustomedPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomedPickerView.swift; sourceTree = "<group>"; };
 		67D135BD2BFF281900A82DAD /* CustomedPickerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomedPickerModel.swift; sourceTree = "<group>"; };
 		67D1AE122C0E03C900DA59AE /* HabitLineDotsGraph.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitLineDotsGraph.swift; sourceTree = "<group>"; };
-		67D886252C1FC8D200667A55 /* HabitLogRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitLogRecord.swift; sourceTree = "<group>"; };
 		67D886272C1FF6CD00667A55 /* HabitLogView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitLogView.swift; sourceTree = "<group>"; };
-		67D886292C21107C00667A55 /* ClockView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockView.swift; sourceTree = "<group>"; };
 		67D8862B2C21285000667A55 /* ReviewBlockView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewBlockView.swift; sourceTree = "<group>"; };
 		67E74BC02C06F821003D1C37 /* HabitCompleteButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitCompleteButtonView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -155,7 +153,6 @@
 				676A86542C083AE8005D742B /* DotView.swift */,
 				676A865A2C083BD1005D742B /* WeekDayIndicatorView.swift */,
 				676A86602C083CBB005D742B /* MonthDayIndicatorView.swift */,
-				67D886292C21107C00667A55 /* ClockView.swift */,
 				67D135BB2BFF27D900A82DAD /* CustomedPickerView.swift */,
 				67B09A462C070F6100F86E23 /* CustomedStyles.swift */,
 				67D135B72BFED88600A82DAD /* CustomedShape.swift */,
@@ -179,11 +176,11 @@
 		676A865D2C083C12005D742B /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				675BD99E2C2A4F9C00F4AD18 /* HabitLogButton.swift */,
 				678A40362BFB980400EC1318 /* HabitView.swift */,
 				67A343FC2C22DB01006D46E9 /* ThemeSelectView.swift */,
 				6766816D2C2136AC009BEF43 /* YearBlockChartView.swift */,
 				67D8862B2C21285000667A55 /* ReviewBlockView.swift */,
-				67D886252C1FC8D200667A55 /* HabitLogRecord.swift */,
 				67B8C4182C1D95E400D82117 /* LineChartView.swift */,
 				67D1AE122C0E03C900DA59AE /* HabitLineDotsGraph.swift */,
 				678A40342BFB97F100EC1318 /* HabitLandscapeDotsDraph.swift */,
@@ -425,8 +422,6 @@
 				67E74BC12C06F821003D1C37 /* HabitCompleteButtonView.swift in Sources */,
 				678A40352BFB97F100EC1318 /* HabitLandscapeDotsDraph.swift in Sources */,
 				678A402D2BFB42EB00EC1318 /* HabitModel.swift in Sources */,
-				67D886262C1FC8D700667A55 /* HabitLogRecord.swift in Sources */,
-				67D8862A2C21108300667A55 /* ClockView.swift in Sources */,
 				67519C6C2C22ADE800AA01E9 /* HideDetailViewButtonTip.swift in Sources */,
 				67A343FD2C22DB0F006D46E9 /* ThemeSelectView.swift in Sources */,
 				671D18CA2C197AEF001C9BC0 /* HabitBarChartView.swift in Sources */,
@@ -445,6 +440,7 @@
 				678A40312BFB932C00EC1318 /* ColorModel.swift in Sources */,
 				676A86612C083CBB005D742B /* MonthDayIndicatorView.swift in Sources */,
 				67D8862C2C21285700667A55 /* ReviewBlockView.swift in Sources */,
+				675BD99F2C2A4F9F00F4AD18 /* HabitLogButton.swift in Sources */,
 				678A40372BFB980400EC1318 /* HabitView.swift in Sources */,
 				67D135BE2BFF281900A82DAD /* CustomedPickerModel.swift in Sources */,
 				6708A3F82C287183004F7468 /* ContentViewComponents.swift in Sources */,

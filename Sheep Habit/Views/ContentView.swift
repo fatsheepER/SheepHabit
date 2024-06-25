@@ -46,7 +46,9 @@ struct ContentView: View {
     @State var presentedHabit: Habit?
     @State var contextMenuDeletedHabit: Habit?
     @State var showContextMenuDeleteAlarm = false
+    @State var showContextMenuArchiveAlarm = false
     @State var showToolbarDeleteAlarm = false
+    @State var showToolbarArchiveAlarm = false
     
     // habit detail
     @State var isPresentingDetailView = false
@@ -180,7 +182,7 @@ extension ContentView {
                                     .padding(.horizontal, 12)
                                     .contextMenu {
                                         Button("归档", systemImage: "archivebox") {
-                                            habit.isArchieved = true
+                                            self.showContextMenuArchiveAlarm = true
                                         }
                                         
                                         Button(role: .destructive) {
@@ -200,6 +202,22 @@ extension ContentView {
                                                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
                                                     if let _habit = contextMenuDeletedHabit {
                                                         modelContext.delete(_habit)
+                                                    }
+                                                }
+                                            },
+                                            secondaryButton: .cancel()
+                                        )
+                                    }
+                                    .alert(isPresented: $showContextMenuArchiveAlarm) {
+                                        Alert(
+                                            title: Text("确定归档这个习惯吗？"),
+                                            message: Text("你可以在回顾页找到已归档的习惯。"),
+                                            primaryButton: .default(Text("归档")) {
+                                                isPresentingDetailView = false
+                                                
+                                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                                                    if let _habit = contextMenuDeletedHabit {
+                                                        _habit.isArchieved = true
                                                     }
                                                 }
                                             },
@@ -239,6 +257,22 @@ extension ContentView {
                                                         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                                                             if let deletedHabit = presentedHabit {
                                                                 modelContext.delete(deletedHabit)
+                                                            }
+                                                        }
+                                                    },
+                                                    secondaryButton: .cancel()
+                                                )
+                                            }
+                                            .alert(isPresented: $showToolbarArchiveAlarm) {
+                                                Alert(
+                                                    title: Text("确定归档这个习惯吗？"),
+                                                    message: Text("你可以在回顾页找到已归档的习惯。"),
+                                                    primaryButton: .default(Text("归档")){
+                                                        isPresentingDetailView = false
+                                                        
+                                                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                                                            if let deletedHabit = presentedHabit {
+                                                                deletedHabit.isArchieved = true
                                                             }
                                                         }
                                                     },

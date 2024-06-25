@@ -77,7 +77,7 @@ extension ContentView {
                 
                 // Archive
                 Button {
-                    
+                    showToolbarArchiveAlarm = true
                 } label: {
                     ZStack {
                         Rectangle()

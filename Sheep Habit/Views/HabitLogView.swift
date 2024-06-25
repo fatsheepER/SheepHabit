@@ -37,12 +37,15 @@ struct HabitLog: View {
             
             let columns = Array(repeating: GridItem(), count: 7)
             
-            LazyVGrid(columns: columns, spacing: 4) {
+            LazyVGrid(columns: columns, spacing: 15) {
+                
                 let dateOfFirstRecord = recordsOfMonth.first?.startOfDay
                 let emptyDaysAhead = dateOfFirstRecord != nil ? calendar.component(.day, from: dateOfFirstRecord!) - 1 : 0
                 let emptyDaysLastMonth = calendar.component(.weekday, from: selectedMonth) - 1
+                // 省略空行
                 let emptySpaces = (emptyDaysAhead + emptyDaysLastMonth) % 7
                 
+                // Weekday indicator
                 Group {
                     Text("S")
                         .font(.system(size: 12, weight: .bold, design: .rounded))
@@ -85,76 +88,60 @@ struct HabitLog: View {
                         completeOnceFor(monthIndex: selectedTag, dayIndex: record.index)
                         fetchRecordOfMonth()
                     } label: {
-                        VStack {
-                            ZStack {
-                                RoundedRectangle(cornerRadius: 5)
-                                    .foregroundStyle(.white.opacity(0.05))
-                                
-                                RoundedRectangle(cornerRadius: 5)
-                                    .foregroundStyle(habit.accentColor)
-                                    .opacity(Double(record.value) / Double(requirement))
-                            }
-                            .frame(width: 30, height: 30)
-                            
-                            let dayComponent = calendar.component(.day, from: record.startOfDay)
-                            Text(String(dayComponent))
-                                .foregroundStyle(.white)
-                                .font(.system(size: 9, weight: .bold, design: .rounded))
-                        }
+                        let dayComponent = calendar.component(.day, from: record.startOfDay)
+                        HabitLogButton(completion: record.value, requirement: requirement, day: dayComponent, accentColor: habit.accentColor)
                     }
                 }
             }
             
-            VStack {
+            // Stepper
+            ZStack {
                 
-                // Stepper
-                ZStack {
-                    
-                    stepperBackground
-                    
-                    // Menu Button
-                    Menu {
-                        Picker(selection: $selectedTag) {
-                            ForEach(validMonths) { option in
-                                Text("\(option.startOfMonth.formatted(.dateTime.year().month()))")
-                                    .tag(option.tag)
-                            }
-                        } label: {
-                            RoundedRectangle(cornerRadius: 8)
+                stepperBackground
+                
+                // Menu Button
+                Menu {
+                    Picker(selection: $selectedTag) {
+                        ForEach(validMonths) { option in
+                            Text("\(option.startOfMonth.formatted(.dateTime.year().month()))")
+                                .tag(option.tag)
                         }
                     } label: {
-                        Text("\(selectedMonth.formatted(.dateTime.year().month()))")
-                            .font(.system(size: 15, weight: .bold))
-                            .foregroundStyle(.white)
-                            .animation(.none, value: self.selectedTag)
+                        RoundedRectangle(cornerRadius: 8)
+                    }
+                } label: {
+                    Text("\(selectedMonth.formatted(.dateTime.year().month()))")
+                        .font(.system(size: 15, weight: .bold))
+                        .foregroundStyle(.white)
+                        .animation(.none, value: self.selectedTag)
+                }
+                
+                // Next and previous button
+                HStack {
+                    Button {
+                        withAnimation {
+                            toLastMonth()
+                        }
+                    } label: {
+                        Image(systemName: "minus")
                     }
                     
-                    // Next and previous button
-                    HStack {
-                        Button {
-                            withAnimation {
-                                toLastMonth()
-                            }
-                        } label: {
-                            Image(systemName: "minus")
+                    Spacer()
+                    
+                    Button {
+                        withAnimation {
+                            toNextMonth()
                         }
-                        
-                        Spacer()
-                        
-                        Button {
-                            withAnimation {
-                                toNextMonth()
-                            }
-                        } label: {
-                            Image(systemName: "plus")
-                        }
+                    } label: {
+                        Image(systemName: "plus")
                     }
-                    .font(.system(size: 15, weight: .bold))
-                    .foregroundStyle(.white)
-                    .padding(.horizontal)
                 }
-                .frame(height: 40)
+                .font(.system(size: 15, weight: .bold))
+                .foregroundStyle(.white)
+                .padding(.horizontal)
             }
+            .frame(height: 40)
+            .padding(.top, 15)
             
             
         }
