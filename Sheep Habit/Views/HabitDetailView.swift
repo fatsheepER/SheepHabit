@@ -45,7 +45,7 @@ struct HabitDetailView: View {
             
             // 边框
             RoundedRectangle(cornerRadius: 30)
-                .strokeBorder(LinearBorderGradient, lineWidth: 1)
+                .strokeBorder(linearBorderGradient, lineWidth: 1)
         }
     }
 }
@@ -132,7 +132,7 @@ extension HabitDetailView {
                 }
                 .font(.system(size: 12, weight: .medium))
                 
-                HabitLandscapeDotsDraph(habit: habit)
+                HabitLandscapeDotsGraph(habit: habit)
                     .padding(.top, 4)
             }
             .padding()

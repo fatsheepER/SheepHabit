@@ -35,7 +35,7 @@ struct TotalUsageTimeBlock: View {
             }
             
             RoundedRectangle(cornerRadius: 15)
-                .strokeBorder(LinearBorderGradient, lineWidth: 1)
+                .strokeBorder(linearBorderGradient, lineWidth: 1)
         }
     }
 }
@@ -90,7 +90,7 @@ struct StreakBlock: View {
             .padding(.horizontal)
             
             RoundedRectangle(cornerRadius: 15)
-                .strokeBorder(LinearBorderGradient, lineWidth: 1)
+                .strokeBorder(linearBorderGradient, lineWidth: 1)
         }
     }
 }

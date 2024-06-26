@@ -8,7 +8,7 @@
 import SwiftUI
 
 // 渐变描边
-var LinearBorderGradient: LinearGradient {
+var linearBorderGradient: LinearGradient {
     LinearGradient(
             gradient:
                 Gradient(colors: [
@@ -20,54 +20,11 @@ var LinearBorderGradient: LinearGradient {
     )
 }
 
-// 卡片渐变背景
-var LinearCardGradient: LinearGradient {
-    LinearGradient(
-        gradient:
-            Gradient(colors: [
-                Color(Color(hex: "002E40")!),
-                Color(Color(hex: "001A26")!)
-            ]),
-        startPoint: .top,
-        endPoint: .bottom
-    )
-}
-
-// 工具栏渐变背景
-var LinearToolbarGradient: LinearGradient {
-    LinearGradient(
-        gradient:
-            Gradient(
-                colors: [
-                    Color(hex: "002639")!,
-                    Color(hex: "00141E")!
-                ]
-            ),
-        startPoint: .top,
-        endPoint: .bottom)
-}
-
-// 渐变描边
-var LinearIndicatorGradient: LinearGradient {
-    LinearGradient(
-            gradient:
-                Gradient(colors: [
-                    Color.white.opacity(0.15),
-                    Color.white.opacity(0.0)
-                ]),
-           startPoint: .top,
-           endPoint: .bottom
-    )
-}
-
-// 进度条渐变色
-var linearAccentColorGradient: LinearGradient {
-    LinearGradient(
-        gradient: 
-            Gradient(
-                colors: [.accent, .accent.opacity(0.5)]
-            ),
-        startPoint: .top,
-        endPoint: .bottom
+var bandRadialGradient: RadialGradient {
+    RadialGradient(
+        colors: [Color(hex: "CBA17B")!.opacity(0.5), .black.opacity(0)],
+        center: .center,
+        startRadius: 0,
+        endRadius: 400
     )
 }

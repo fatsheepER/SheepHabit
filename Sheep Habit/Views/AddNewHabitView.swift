@@ -27,7 +27,8 @@ import SwiftUI
  */
 
 struct AddNewHabitView: View {
-    @Environment(\.modelContext) private var modelContext
+    @Environment(\.modelContext) var modelContext
+    @EnvironmentObject var colorManager: ColorManager
     @Binding var isPresented: Bool
     
     @State var state: Int = 0;
@@ -44,7 +45,7 @@ struct AddNewHabitView: View {
     
     var body: some View {
         ZStack {
-            Color(.accentBackground)
+            Color(colorManager.selectedTheme.background)
                 .ignoresSafeArea()
             
             VStack {
@@ -252,7 +253,7 @@ extension AddNewHabitView {
                         .foregroundStyle(.white.opacity(0.15))
                         .overlay {
                             RoundedRectangle(cornerRadius: 35)
-                                .strokeBorder(LinearBorderGradient, lineWidth: 1)
+                                .strokeBorder(linearBorderGradient, lineWidth: 1)
                         }
                 }
                 
@@ -331,10 +332,10 @@ extension AddNewHabitView {
                 }
             } label: {
                 RoundedRectangle(cornerRadius: 35)
-                    .foregroundStyle(LinearToolbarGradient)
+                    .foregroundStyle(colorManager.selectedTheme.secondary)
                     .overlay {
                         RoundedRectangle(cornerRadius: 35)
-                            .strokeBorder(LinearBorderGradient, lineWidth: 1)
+                            .strokeBorder(linearBorderGradient, lineWidth: 1)
                     }
             }
             
@@ -355,7 +356,7 @@ extension AddNewHabitView {
                     .foregroundStyle(.white.opacity(0.15))
                     .overlay {
                         RoundedRectangle(cornerRadius: 35)
-                            .strokeBorder(LinearBorderGradient, lineWidth: 1)
+                            .strokeBorder(linearBorderGradient, lineWidth: 1)
                     }
             }
             Image(systemName: "chevron.left")
@@ -375,7 +376,7 @@ extension AddNewHabitView {
                     .foregroundStyle(.red.opacity(0.15))
                     .overlay {
                         RoundedRectangle(cornerRadius: 35)
-                            .strokeBorder(LinearBorderGradient, lineWidth: 1)
+                            .strokeBorder(linearBorderGradient, lineWidth: 1)
                     }
             }
             

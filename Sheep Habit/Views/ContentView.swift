@@ -496,7 +496,7 @@ extension ContentView {
                             .padding(.top, 15)
                             
                             RoundedRectangle(cornerRadius: 15)
-                                .strokeBorder(LinearBorderGradient, lineWidth: 1)
+                                .strokeBorder(linearBorderGradient, lineWidth: 1)
                         }
                         .frame(height: self.isExpandingYearBlock ? 140 : 105)
                         .onTapGesture {

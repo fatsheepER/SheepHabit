@@ -24,19 +24,6 @@ struct DotView: View {
         
     }
     
-    // 渐变描边
-    var LinearBorderGradient: LinearGradient {
-        LinearGradient(
-                gradient:
-                    Gradient(colors: [
-                        Color.white.opacity(0.3),
-                        Color.white.opacity(0.0)
-                    ]),
-               startPoint: .top,
-               endPoint: .bottom
-        )
-    }
-    
     // 底部基础
     private var baisc: some View {
         RoundedRectangle(cornerRadius: size / 4)
@@ -52,7 +39,7 @@ struct DotView: View {
     // 本日指示框
     private var today: some View {
         RoundedRectangle(cornerRadius: size / 4)
-            .strokeBorder(LinearBorderGradient, lineWidth: size / 8)
+            .strokeBorder(linearBorderGradient, lineWidth: size / 8)
             .opacity(isToday ? 1 : 0)
     }
 }

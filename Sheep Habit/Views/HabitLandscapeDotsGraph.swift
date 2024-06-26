@@ -8,7 +8,7 @@
 import SwiftUI
 
 // 点状热力图
-struct HabitLandscapeDotsDraph: View {
+struct HabitLandscapeDotsGraph: View {
     var dotSize: CGFloat = 10
     var dotSpacing: CGFloat = 2
     
@@ -67,7 +67,7 @@ struct HabitLandscapeDotsDraph: View {
     }
 }
 
-extension HabitLandscapeDotsDraph {
+extension HabitLandscapeDotsGraph {
     
     func fetchData() {
         isLoading = true

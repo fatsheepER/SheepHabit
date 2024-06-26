@@ -79,7 +79,7 @@ extension HabitCompleteButtonView {
     ZStack {
         RoundedRectangle(cornerRadius: 18)
             .frame(width: 90, height: 90)
-            .foregroundStyle(LinearCardGradient)
+            .foregroundStyle(.black)
         HabitCompleteButtonView(completionPercentage: 1, accentColor: .blue)
     }
 }

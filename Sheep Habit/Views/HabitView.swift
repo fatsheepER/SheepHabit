@@ -19,7 +19,7 @@ struct HabitView: View {
                 .foregroundStyle(.white.opacity(0.05))
                 .overlay {
                     RoundedRectangle(cornerRadius: 22, style: .continuous)
-                        .strokeBorder(LinearBorderGradient, lineWidth: 1)
+                        .strokeBorder(linearBorderGradient, lineWidth: 1)
                 }
             
             VStack() {
