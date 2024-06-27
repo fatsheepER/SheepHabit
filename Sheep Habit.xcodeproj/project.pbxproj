@@ -18,6 +18,8 @@
 		676A865B2C083BD1005D742B /* WeekDayIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 676A865A2C083BD1005D742B /* WeekDayIndicatorView.swift */; };
 		676A86652C0B114A005D742B /* HabitDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 676A86642C0B114A005D742B /* HabitDetailView.swift */; };
 		676A86672C0B2813005D742B /* TabSwitchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 676A86662C0B2813005D742B /* TabSwitchView.swift */; };
+		6782896A2C2CE4BF0031028D /* SymbolPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 678289692C2CE4AA0031028D /* SymbolPicker.swift */; };
+		6782896D2C2CEE360031028D /* ColorPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6782896C2C2CEE300031028D /* ColorPicker.swift */; };
 		6788D24E2C23C50C001E3CDD /* ThemeThumbnail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6788D24D2C23C505001E3CDD /* ThemeThumbnail.swift */; };
 		678A40012BFB42CE00EC1318 /* Sheep_HabitApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 678A40002BFB42CE00EC1318 /* Sheep_HabitApp.swift */; };
 		678A40032BFB42CE00EC1318 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 678A40022BFB42CE00EC1318 /* ContentView.swift */; };
@@ -27,7 +29,7 @@
 		678A401E2BFB42CF00EC1318 /* Sheep_HabitUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 678A401D2BFB42CF00EC1318 /* Sheep_HabitUITests.swift */; };
 		678A40202BFB42CF00EC1318 /* Sheep_HabitUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 678A401F2BFB42CF00EC1318 /* Sheep_HabitUITestsLaunchTests.swift */; };
 		678A402D2BFB42EB00EC1318 /* HabitModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 678A402C2BFB42EB00EC1318 /* HabitModel.swift */; };
-		678A40312BFB932C00EC1318 /* ColorModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 678A40302BFB932C00EC1318 /* ColorModel.swift */; };
+		678A40312BFB932C00EC1318 /* ColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 678A40302BFB932C00EC1318 /* ColorExtension.swift */; };
 		678A40352BFB97F100EC1318 /* HabitLandscapeDotsGraph.swift in Sources */ = {isa = PBXBuildFile; fileRef = 678A40342BFB97F100EC1318 /* HabitLandscapeDotsGraph.swift */; };
 		678A40372BFB980400EC1318 /* HabitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 678A40362BFB980400EC1318 /* HabitView.swift */; };
 		678A403B2BFC81D700EC1318 /* TestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 678A403A2BFC81D700EC1318 /* TestView.swift */; };
@@ -76,6 +78,8 @@
 		676A865A2C083BD1005D742B /* WeekDayIndicatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekDayIndicatorView.swift; sourceTree = "<group>"; };
 		676A86642C0B114A005D742B /* HabitDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitDetailView.swift; sourceTree = "<group>"; };
 		676A86662C0B2813005D742B /* TabSwitchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabSwitchView.swift; sourceTree = "<group>"; };
+		678289692C2CE4AA0031028D /* SymbolPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SymbolPicker.swift; sourceTree = "<group>"; };
+		6782896C2C2CEE300031028D /* ColorPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPicker.swift; sourceTree = "<group>"; };
 		6788D24D2C23C505001E3CDD /* ThemeThumbnail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeThumbnail.swift; sourceTree = "<group>"; };
 		678A3FFD2BFB42CE00EC1318 /* Sheep Habit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Sheep Habit.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		678A40002BFB42CE00EC1318 /* Sheep_HabitApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sheep_HabitApp.swift; sourceTree = "<group>"; };
@@ -88,7 +92,7 @@
 		678A401D2BFB42CF00EC1318 /* Sheep_HabitUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sheep_HabitUITests.swift; sourceTree = "<group>"; };
 		678A401F2BFB42CF00EC1318 /* Sheep_HabitUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sheep_HabitUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		678A402C2BFB42EB00EC1318 /* HabitModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitModel.swift; sourceTree = "<group>"; };
-		678A40302BFB932C00EC1318 /* ColorModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorModel.swift; sourceTree = "<group>"; };
+		678A40302BFB932C00EC1318 /* ColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtension.swift; sourceTree = "<group>"; };
 		678A40342BFB97F100EC1318 /* HabitLandscapeDotsGraph.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitLandscapeDotsGraph.swift; sourceTree = "<group>"; };
 		678A40362BFB980400EC1318 /* HabitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitView.swift; sourceTree = "<group>"; };
 		678A403A2BFC81D700EC1318 /* TestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestView.swift; sourceTree = "<group>"; };
@@ -166,6 +170,8 @@
 		676A865D2C083C12005D742B /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				6782896C2C2CEE300031028D /* ColorPicker.swift */,
+				678289692C2CE4AA0031028D /* SymbolPicker.swift */,
 				678A40362BFB980400EC1318 /* HabitView.swift */,
 				67A343FC2C22DB01006D46E9 /* ThemeSelectView.swift */,
 				6766816D2C2136AC009BEF43 /* YearBlockChartView.swift */,
@@ -178,6 +184,22 @@
 				67D135BB2BFF27D900A82DAD /* CustomedPickerView.swift */,
 			);
 			name = Components;
+			sourceTree = "<group>";
+		};
+		678289682C2C53EC0031028D /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				67A343FA2C22D190006D46E9 /* ColorManager.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		6782896B2C2CE5250031028D /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				678A40302BFB932C00EC1318 /* ColorExtension.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		678A3FF42BFB42CE00EC1318 = {
@@ -204,11 +226,12 @@
 		678A3FFF2BFB42CE00EC1318 /* Sheep Habit */ = {
 			isa = PBXGroup;
 			children = (
-				67A343FA2C22D190006D46E9 /* ColorManager.swift */,
 				678A40002BFB42CE00EC1318 /* Sheep_HabitApp.swift */,
 				678A40062BFB42CF00EC1318 /* Assets.xcassets */,
 				678A40322BFB95A600EC1318 /* Models */,
+				678289682C2C53EC0031028D /* ViewModel */,
 				678A40332BFB95B700EC1318 /* Views */,
+				6782896B2C2CE5250031028D /* Extensions */,
 				678A40082BFB42CF00EC1318 /* Preview Content */,
 			);
 			path = "Sheep Habit";
@@ -243,7 +266,6 @@
 			isa = PBXGroup;
 			children = (
 				678A402C2BFB42EB00EC1318 /* HabitModel.swift */,
-				678A40302BFB932C00EC1318 /* ColorModel.swift */,
 				67D135BD2BFF281900A82DAD /* CustomedPickerModel.swift */,
 			);
 			path = Models;
@@ -416,19 +438,21 @@
 				67D135BC2BFF27D900A82DAD /* CustomedPickerView.swift in Sources */,
 				67B8C4152C1C548D00D82117 /* AppIconView.swift in Sources */,
 				6788D24E2C23C50C001E3CDD /* ThemeThumbnail.swift in Sources */,
+				6782896D2C2CEE360031028D /* ColorPicker.swift in Sources */,
 				67D1AE132C0E03C900DA59AE /* HabitLineDotsGraph.swift in Sources */,
 				67A343FB2C22D199006D46E9 /* ColorManager.swift in Sources */,
 				67B8C4192C1D95E900D82117 /* LineChartView.swift in Sources */,
 				67D135B82BFED88600A82DAD /* CustomedShapes.swift in Sources */,
 				676A865B2C083BD1005D742B /* WeekDayIndicatorView.swift in Sources */,
 				67B09A472C070F6100F86E23 /* CustomedStyles.swift in Sources */,
-				678A40312BFB932C00EC1318 /* ColorModel.swift in Sources */,
+				678A40312BFB932C00EC1318 /* ColorExtension.swift in Sources */,
 				67D8862C2C21285700667A55 /* ReviewBlockView.swift in Sources */,
 				675BD99F2C2A4F9F00F4AD18 /* HabitLogButton.swift in Sources */,
 				678A40372BFB980400EC1318 /* HabitView.swift in Sources */,
 				67D135BE2BFF281900A82DAD /* CustomedPickerModel.swift in Sources */,
 				6708A3F82C287183004F7468 /* ContentViewComponents.swift in Sources */,
 				678A403B2BFC81D700EC1318 /* TestView.swift in Sources */,
+				6782896A2C2CE4BF0031028D /* SymbolPicker.swift in Sources */,
 				67D886282C1FF6DA00667A55 /* HabitLogView.swift in Sources */,
 				678A40032BFB42CE00EC1318 /* ContentView.swift in Sources */,
 				678A40012BFB42CE00EC1318 /* Sheep_HabitApp.swift in Sources */,
