@@ -27,7 +27,7 @@ struct ColorPicker: View {
     
     let columns = Array(repeating: GridItem(.flexible(minimum: 25, maximum: 35)), count: 8)
     
-    @State var selectedColorHex: String = "59CAFF"
+    @Binding var selectedColorHex: String
     @State var isEditing: Bool = false
     
     var body: some View {
@@ -106,11 +106,11 @@ struct ColorPicker: View {
     }
 }
 
-#Preview {
-    ZStack {
-        Color(.black)
-            .ignoresSafeArea()
-        
-        ColorPicker()
-    }
-}
+//#Preview {
+//    ZStack {
+//        Color(.black)
+//            .ignoresSafeArea()
+//        
+//        ColorPicker()
+//    }
+//}

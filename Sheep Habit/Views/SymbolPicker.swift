@@ -61,7 +61,7 @@ struct SymbolPicker: View {
     
     let columns = Array(repeating: GridItem(.flexible(minimum: 25, maximum: 35)), count: 8)
     
-    @State var selectedSymbolSystemName: String = "curlybraces"
+    @Binding var selectedSymbolSystemName: String
     @State var isEditing: Bool = false
     
     var body: some View {
@@ -132,11 +132,11 @@ struct SymbolPicker: View {
     }
 }
 
-#Preview {
-    ZStack {
-        Color.black
-            .ignoresSafeArea()
-        
-        SymbolPicker()
-    }
-}
+//#Preview {
+//    ZStack {
+//        Color.black
+//            .ignoresSafeArea()
+//        
+//        SymbolPicker()
+//    }
+//}

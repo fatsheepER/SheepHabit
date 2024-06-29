@@ -36,7 +36,7 @@ struct AddNewHabitView: View {
     @State var detail: String = ""
     @State var requiredCompletion: Int = 1
     @State var iconSystemName: String = "curlybraces"
-    @State var accentColor: Color = Color(hex: "59CAFF")!
+    @State var accentColorHex: String = "59CAFF"
     
     @FocusState var focusOnName: Bool
     @FocusState var focusOnDetail: Bool
@@ -208,29 +208,35 @@ extension AddNewHabitView {
             ZStack() {
                 Image(systemName: iconSystemName)
                     .font(.system(size: 50, weight: .medium))
-                Circle()
-                    .strokeBorder(lineWidth: 4)
-                    .frame(height: 130)
-                    .foregroundStyle(accentColor)
+                
+                if let accentColor = Color(hex: accentColorHex) {
+                    Circle()
+                        .strokeBorder(lineWidth: 4)
+                        .frame(height: 130)
+                        .foregroundStyle(accentColor)
+                }
+                else {
+                    Circle()
+                        .strokeBorder(lineWidth: 4)
+                        .frame(height: 130)
+                        .foregroundStyle(.gray)
+                }
+                
             }
             .frame(width: 130, height: 130)
             .padding(.bottom, 50)
             .padding(.top, 80)
             
-            Text("🎨随意选择图标和颜色：")
+            Text("🎨选择图标和颜色：")
                 .multilineTextAlignment(.center)
                 .font(.system(size: 32, weight: .bold))
             
-            Text("他们并不全是蓝色的")
-                .font(.system(size: 20))
-            
-            VStack {
-                GridColorPickerView(selectedColor: $accentColor)
-                    .padding(.vertical, 10)
-                GridIconPickerView(selectedIconSystemName: $iconSystemName)
+            ScrollView(.vertical, showsIndicators: false) {
+                ColorPicker(selectedColorHex: $accentColorHex)
+                
+                SymbolPicker(selectedSymbolSystemName: $iconSystemName)
             }
-            .padding()
-            .frame(height: 300)
+            .padding(.bottom, 80)
         }
         .frame(maxHeight: .infinity, alignment: .top)
     }
@@ -274,7 +280,7 @@ extension AddNewHabitView {
         if state < 7 {
             // Save and finish
             if state == 5 {
-                let newHabit = Habit(name: self.name, detail: self.detail, iconSystemName: self.iconSystemName, accentColor: self.accentColor, requiredCompletion: self.requiredCompletion)
+                let newHabit = Habit(name: self.name, detail: self.detail, iconSystemName: self.iconSystemName, accentColor: Color(hex: accentColorHex)!, requiredCompletion: self.requiredCompletion)
                 modelContext.insert(newHabit)
                 
                 self.isPresented.toggle()
@@ -406,10 +412,10 @@ extension AddNewHabitView {
     }
 }
 
-#Preview {
-    ZStack {
-        Color(.accentBackground)
-            .ignoresSafeArea()
-//        AddNewHabitView(state: 3)
-    }
-}
+//#Preview {
+//    ZStack {
+//        Color(.accentBackground)
+//            .ignoresSafeArea()
+////        AddNewHabitView(state: 3)
+//    }
+//}

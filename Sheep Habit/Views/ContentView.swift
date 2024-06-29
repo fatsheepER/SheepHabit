@@ -294,6 +294,9 @@ extension ContentView {
                                                 .presentationBackground(.clear)
                                                 .padding(.horizontal, 5)
                                                 .padding(.bottom, 60)
+                                                .onAppear {
+                                                    _habit.calculateStreak()
+                                                }
                                         }
                                     }
                                     

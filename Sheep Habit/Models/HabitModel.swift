@@ -164,8 +164,8 @@ extension Habit {
     
     func calculateStreak() {
         let calendar = Calendar.current
-        
         let today = calendar.startOfDay(for: .now)
+        
         var current = 0
         var longest = 0
         var tillToday = true
@@ -173,23 +173,19 @@ extension Habit {
         for dayIndex in 0..<totalDays {
             let date = calendar.date(byAdding: .day, value: -dayIndex, to: today)!
             let value = self.completions[date] ?? 0
-            if value == self.requiredCompletion {
-                if tillToday {
-                    current += 1
-                }
-                longest += 1
-                self.longestStreak = max(self.longestStreak, longest)
+            if value >= self.requiredCompletion {
+                current += 1
+                longest = max(longest, current)
             }
             else {
                 if tillToday {
                     tillToday = false
                     self.currentStreak = current
                 }
-                longest = 0
+                current = 0
             }
         }
         
-        self.currentStreak = (current != 0) ? current : 0
         self.longestStreak = longest
     }
 }

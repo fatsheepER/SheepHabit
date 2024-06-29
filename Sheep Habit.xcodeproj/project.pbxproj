@@ -14,7 +14,6 @@
 		67519C6C2C22ADE800AA01E9 /* HideDetailViewButtonTip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67519C6B2C22ADDD00AA01E9 /* HideDetailViewButtonTip.swift */; };
 		675BD99F2C2A4F9F00F4AD18 /* HabitLogButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 675BD99E2C2A4F9C00F4AD18 /* HabitLogButton.swift */; };
 		6766816E2C2136B2009BEF43 /* YearBlockChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6766816D2C2136AC009BEF43 /* YearBlockChartView.swift */; };
-		676A86552C083AE8005D742B /* DotView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 676A86542C083AE8005D742B /* DotView.swift */; };
 		676A865B2C083BD1005D742B /* WeekDayIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 676A865A2C083BD1005D742B /* WeekDayIndicatorView.swift */; };
 		676A86652C0B114A005D742B /* HabitDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 676A86642C0B114A005D742B /* HabitDetailView.swift */; };
 		676A86672C0B2813005D742B /* TabSwitchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 676A86662C0B2813005D742B /* TabSwitchView.swift */; };
@@ -74,7 +73,6 @@
 		67519C6B2C22ADDD00AA01E9 /* HideDetailViewButtonTip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HideDetailViewButtonTip.swift; sourceTree = "<group>"; };
 		675BD99E2C2A4F9C00F4AD18 /* HabitLogButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitLogButton.swift; sourceTree = "<group>"; };
 		6766816D2C2136AC009BEF43 /* YearBlockChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YearBlockChartView.swift; sourceTree = "<group>"; };
-		676A86542C083AE8005D742B /* DotView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DotView.swift; sourceTree = "<group>"; };
 		676A865A2C083BD1005D742B /* WeekDayIndicatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekDayIndicatorView.swift; sourceTree = "<group>"; };
 		676A86642C0B114A005D742B /* HabitDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitDetailView.swift; sourceTree = "<group>"; };
 		676A86662C0B2813005D742B /* TabSwitchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabSwitchView.swift; sourceTree = "<group>"; };
@@ -141,15 +139,14 @@
 			isa = PBXGroup;
 			children = (
 				675BD99E2C2A4F9C00F4AD18 /* HabitLogButton.swift */,
-				67519C6B2C22ADDD00AA01E9 /* HideDetailViewButtonTip.swift */,
 				6788D24D2C23C505001E3CDD /* ThemeThumbnail.swift */,
-				673CDFF22C21CFE3009C8317 /* HabitCompletionCaption.swift */,
 				67E74BC02C06F821003D1C37 /* HabitCompleteButtonView.swift */,
+				673CDFF22C21CFE3009C8317 /* HabitCompletionCaption.swift */,
 				67B8C4142C1C548800D82117 /* AppIconView.swift */,
-				676A86542C083AE8005D742B /* DotView.swift */,
 				676A865A2C083BD1005D742B /* WeekDayIndicatorView.swift */,
 				67B09A462C070F6100F86E23 /* CustomedStyles.swift */,
 				67D135B72BFED88600A82DAD /* CustomedShapes.swift */,
+				67519C6B2C22ADDD00AA01E9 /* HideDetailViewButtonTip.swift */,
 			);
 			name = Elements;
 			sourceTree = "<group>";
@@ -157,7 +154,6 @@
 		676A86592C083B83005D742B /* Screen */ = {
 			isa = PBXGroup;
 			children = (
-				67D886272C1FF6CD00667A55 /* HabitLogView.swift */,
 				678A40022BFB42CE00EC1318 /* ContentView.swift */,
 				67519C692C22973A00AA01E9 /* ContentViewFunctions.swift */,
 				6708A3F72C28717A004F7468 /* ContentViewComponents.swift */,
@@ -170,6 +166,7 @@
 		676A865D2C083C12005D742B /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				67D886272C1FF6CD00667A55 /* HabitLogView.swift */,
 				6782896C2C2CEE300031028D /* ColorPicker.swift */,
 				678289692C2CE4AA0031028D /* SymbolPicker.swift */,
 				678A40362BFB980400EC1318 /* HabitView.swift */,
@@ -457,7 +454,6 @@
 				678A40032BFB42CE00EC1318 /* ContentView.swift in Sources */,
 				678A40012BFB42CE00EC1318 /* Sheep_HabitApp.swift in Sources */,
 				67519C6A2C22974A00AA01E9 /* ContentViewFunctions.swift in Sources */,
-				676A86552C083AE8005D742B /* DotView.swift in Sources */,
 				6766816E2C2136B2009BEF43 /* YearBlockChartView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
